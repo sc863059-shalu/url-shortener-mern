@@ -1,0 +1,14 @@
+<!doctype html>
+<title>Auto Demo - URL Shortener</title>
+<meta charset="utf-8">
+<style>body{font-family:Arial;padding:40px;background:#f8f8f8}.card{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:20px;width:900px;margin-bottom:16px}.row{display:flex;gap:8px}input{flex:1;padding:10px;border:1px solid #ccc;border-radius:8px}button{padding:10px 16px;border:1px solid #333;background:#fff;border-radius:8px;cursor:pointer}.muted{opacity:.7;font-size:12px}.hidden{display:none}.highlight{outline:4px solid rgba(255,215,0,.7);border-radius:8px}</style>
+<h1>URL Shortener (Auto Demo)</h1>
+<div id=home class=card>
+<h3>Home</h3>
+<div class=row><input id=inp placeholder='Enter long URL'><button id=btn>Shorten</button></div>
+<p id=out class=muted></p></div>
+<div id=redir class='card hidden'><h3>Redirect</h3><p>Opening <b>http://localhost:3000/abc123</b> → redirecting to original URL…</p></div>
+<div id=admin class='card hidden'><h3>Admin</h3><table border=1 cellpadding=8><tr><th>Short Code</th><th>Long URL</th><th>Clicks</th></tr><tr><td>abc123</td><td>https://www.wikipedia.org/wiki/URL_shortening_example</td><td id=clicks>1</td></tr></table></div>
+<script>
+const url="https://www.wikipedia.org/wiki/URL_shortening_example";const inp=document.getElementById('inp');const btn=document.getElementById('btn');const out=document.getElementById('out');const redir=document.getElementById('redir');const admin=document.getElementById('admin');const clicks=document.getElementById('clicks');let i=0;function typeIt(){if(i<url.length){inp.value+=url.charAt(i++);setTimeout(typeIt,35)}else{btn.classList.add('highlight');setTimeout(()=>btn.click(),300)}}btn.onclick=()=>{btn.classList.remove('highlight');out.innerHTML='Short URL: <b>http://localhost:3000/abc123</b>';setTimeout(()=>{document.getElementById('home').classList.add('hidden');redir.classList.remove('hidden');setTimeout(()=>{redir.classList.add('hidden');admin.classList.remove('hidden');clicks.innerText='2'},800)},700)};window.onload=typeIt;
+</script>
